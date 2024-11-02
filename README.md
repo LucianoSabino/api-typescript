@@ -72,3 +72,20 @@ para o git iginorar esses arquivos.
 Yup é um construtor de esquema para análise e validação de valor em tempo de execução.
 
         yarn add yup
+
+<h5> Explicando um pouco do codigo (src/servser/controller/cidade/create)</h5>
+
+![imagem de arquitetura do projeto](https://camo.githubusercontent.com/0b12d5e1fa9228bfcc8c3a1379a41df22f977fcec7b492639ae8fa624cd4ebfb/68747470733a2f2f696d6775722e636f6d2f6b356d58466f5a2e706e67)
+
+Interfaces
+
+- ICidade: Define a estrutura de um objeto que representa uma cidade. Possui as propriedades nome (nome da cidade) e estado (estado da cidade).
+- IFilter: Define a estrutura de um objeto que representa um filtro. Possui a propriedade filter (critério de filtragem).
+- 
+Validação
+
+- createValidation: Cria um esquema de validação para garantir que os dados recebidos nas requisições estejam no formato correto.
+Valida tanto o corpo da requisição (body) quanto os parâmetros da query (query).
+
+- Corpo da requisição: Verifica se o nome da cidade possui pelo menos 3 caracteres e se o estado possui exatamente 2 caracteres.
+Parâmetros da query: Verifica se o parâmetro filter possui pelo menos 3 caracteres.
