@@ -13,6 +13,11 @@ router.get(
     CidadeController.GetAllValidation,
     CidadeController.getAll
 );
+router.get(
+    "/cidade/:id",
+    CidadeController.getByIdValidation,
+    CidadeController.getById
+);
 router.post(
     "/cidade",
     CidadeController.createValidation,
