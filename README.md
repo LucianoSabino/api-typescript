@@ -119,3 +119,34 @@ Adiciona as mensagens de erro ao errorsResult.
 Tratamento de Resultados:
 Se não houver erros, chama next() para passar para o próximo middleware.
 Se houver erros, retorna uma resposta com status 400 (Bad Request) e os detalhes dos erros.
+
+
+<h3 align="center"> Teste para Api</h3>
+Jest é um poderoso framework de testes JavaScript de código aberto
+Qualque duvida esta no [video](https://youtu.be/G6Lo8wk4Y5w?si=0Lm1hyt72u474iMg)
+
+Instale essas biblioteca:
+
+        yarn add jest ts-jest @types/jest
+
+Depois inicie:
+
+        yarn jest --init
+        yarn add -D supertest @types/supertest
+
+No arquivo *jest.config.ts* coloque: 
+
+        coverageReporters: ["json"],
+        setupFilesAfterEnv: ["./tests/jest.setup.ts"],
+        testMatch: ["<rootDir>/tests/**/*.test.ts"],
+        transform: {
+            "^.+\\.(ts|tsx)$": "ts-jest",
+        },
+
+Depois crie uma psata *tests* dentro dela um arquivo *jest.setup.ts* vai conter:
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/jest1.png?raw=true)
+
+No arquivo *tsconfig.json* depois de *compilerOptions* coloque:
+
+        "exclude": ["./jest.config.ts", "./node_modules", "./tests", "./build"]
