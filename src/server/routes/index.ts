@@ -13,15 +13,29 @@ router.get(
     CidadeController.GetAllValidation,
     CidadeController.getAll
 );
+
 router.get(
     "/cidade/:id",
     CidadeController.getByIdValidation,
     CidadeController.getById
 );
+
 router.post(
     "/cidade",
     CidadeController.createValidation,
     CidadeController.create
+);
+
+router.put(
+    "/cidade/:id",
+    CidadeController.updateByValidation,
+    CidadeController.updateById
+);
+
+router.delete(
+    "/cidade/:id",
+    CidadeController.deleteByIdValidation,
+    CidadeController.deleteById
 );
 
 export { router };
