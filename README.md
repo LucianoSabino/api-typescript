@@ -128,11 +128,11 @@ Qualque duvida esta no [video](https://youtu.be/G6Lo8wk4Y5w?si=0Lm1hyt72u474iMg)
 Instale essas biblioteca:
 
         yarn add jest ts-jest @types/jest
+        yarn add -D supertest @types/supertest
 
 Depois inicie:
 
         yarn jest --init
-        yarn add -D supertest @types/supertest
 
 No arquivo *jest.config.ts* coloque: 
 
