@@ -184,7 +184,11 @@ Knex.js é uma biblioteca para Node.js que facilita a interação com bancos de 
 
           yarn add sqlite3
 
+<<<<<<< HEAD
 -   No arquivo _database/Knex/knexfile.ts_ esta as configuração de conexão do banco de dados.
+=======
+  <h5>No arquivo _database/Knex/Environement.ts_ esta as configuração de conexão do banco de dados.</h5>
+>>>>>>> df967770124eac96f5628dbab29b54a10ad4f793
 
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/knexC.png?raw=true)
 
@@ -194,9 +198,10 @@ Tendo tres tipos de conexão
 -   Produção quando estiver no servidor
 -   Desenvolvimento
 
--   No arquivo _database/Knex/index.ts_ esta passando as configuração de conexão e alternando entre elas.
+  <h5>No arquivo _database/Knex/index.ts_ esta passando as configuração de conexão e alternando entre elas</h5>
 
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/knexCIndex.png?raw=true)
+<<<<<<< HEAD
 
 <h5> Fazendo as migrações </h5>
 
@@ -218,3 +223,5 @@ Depois no arquivo _package.json_ coloque:
 Depois so rodar o comando:
 
         yarn knex:migrate
+=======
+>>>>>>> df967770124eac96f5628dbab29b54a10ad4f793
