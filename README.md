@@ -60,7 +60,6 @@ e coloque
             _node_modules
             .env_
 
-
 para o git iginorar esses arquivos.
 
 -   Blibioteca para mensagem de erro:
@@ -120,7 +119,6 @@ Tratamento de Resultados:
 Se não houver erros, chama next() para passar para o próximo middleware.
 Se houver erros, retorna uma resposta com status 400 (Bad Request) e os detalhes dos erros.
 
-
 <h3 align="center"> Teste para Api</h3>
 Jest é um poderoso framework de testes JavaScript de código aberto
 Qualque duvida esta no [video](https://youtu.be/G6Lo8wk4Y5w?si=0Lm1hyt72u474iMg)
@@ -134,7 +132,7 @@ Depois inicie:
 
         yarn jest --init
 
-No arquivo *jest.config.ts* coloque: 
+No arquivo _jest.config.ts_ coloque:
 
         coverageReporters: ["json"],
         setupFilesAfterEnv: ["./tests/jest.setup.ts"],
@@ -143,10 +141,58 @@ No arquivo *jest.config.ts* coloque:
             "^.+\\.(ts|tsx)$": "ts-jest",
         },
 
-Depois crie uma psata *tests* dentro dela um arquivo *jest.setup.ts* vai conter:
+Depois crie uma psata _tests_ dentro dela um arquivo _jest.setup.ts_ vai conter:
 
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/jest1.png?raw=true)
 
-No arquivo *tsconfig.json* depois de *compilerOptions* coloque:
+No arquivo _tsconfig.json_ depois de _compilerOptions_ coloque:
 
         "exclude": ["./jest.config.ts", "./node_modules", "./tests", "./build"]
+
+Colocar no _.gitignore_:
+
+        /coverage
+
+-   Exemplo de um teste para criar ciadade
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/test.png?raw=true)
+
+Na hora de executar os teste rodar o comando:
+
+        yarn test
+
+Assim foi feito para todas as rotas.
+
+<h3 align="center"> Deploy da API Express no Render</h3>
+
+[Site Render](https://render.com/)
+[Video explicativo](https://youtu.be/hgCASoTp0XY?si=q1lHVePlOiR_Jmzf)
+
+<h3 align="center"> Banco de dados</h3>
+
+<h5> Utilizando Knex.js </h5>
+Knex.js é uma biblioteca para Node.js que facilita a interação com bancos de dados relacionais. Em outras palavras, ele é um query builder, ou seja, uma ferramenta que constrói consultas SQL de forma mais intuitiva e organizada, eliminando a necessidade de escrever as consultas manualmente.
+
+-   Instalando as blibioteca:
+
+          yarn add knex
+
+<h5> Utilizando o banco de dados Sqlite </h5>
+
+-   Instalando as blibioteca:
+
+          yarn add sqlite -D
+
+-   No arquivo _database/Knex/Environement.ts_ esta as configuração de conexão do banco de dados.
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/knexC.png?raw=true)
+
+Tendo tres tipos de conexão
+
+-   test so para quando for rodar os testes assim os dados seram apagados depois
+-   Produção quando estiver no servidor
+-   Desenvolvimento
+
+-   No arquivo _database/Knex/index.ts_ esta passando as configuração de conexão e alternando entre elas.
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/knexCindex.png?raw=true)
