@@ -169,6 +169,7 @@ Assim foi feito para todas as rotas.
 [Video explicativo](https://youtu.be/hgCASoTp0XY?si=q1lHVePlOiR_Jmzf)
 
 <h3 align="center"> Banco de dados</h3>
+OBS: SE atente aos caminhos dos arquivos e comandos.
 
 <h5> Utilizando Knex.js </h5>
 Knex.js é uma biblioteca para Node.js que facilita a interação com bancos de dados relacionais. Em outras palavras, ele é um query builder, ou seja, uma ferramenta que constrói consultas SQL de forma mais intuitiva e organizada, eliminando a necessidade de escrever as consultas manualmente.
@@ -181,9 +182,9 @@ Knex.js é uma biblioteca para Node.js que facilita a interação com bancos de 
 
 -   Instalando as blibioteca:
 
-          yarn add sqlite -D
+          yarn add sqlite3
 
--   No arquivo _database/Knex/Environement.ts_ esta as configuração de conexão do banco de dados.
+-   No arquivo _database/Knex/knexfile.ts_ esta as configuração de conexão do banco de dados.
 
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/knexC.png?raw=true)
 
@@ -195,4 +196,25 @@ Tendo tres tipos de conexão
 
 -   No arquivo _database/Knex/index.ts_ esta passando as configuração de conexão e alternando entre elas.
 
-![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/knexCindex.png?raw=true)
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/knexCIndex.png?raw=true)
+
+<h5> Fazendo as migrações </h5>
+
+-   Execute esse comando para criar um arquivo de migração:
+
+          yarn knex --knexfile ./src/server/database/Knex/knexfile.ts migrate:make test
+
+Depois so fazer as configurações de tabelas, Exemplo:
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/extable.png?raw=true)
+
+Depois no arquivo _package.json_ coloque:
+
+        "knex:rollback-all": "knex --knexfile ./src/server/database/Knex/knexfile.ts migrate:rollback --all",
+        "knex:rollback": "knex --knexfile ./src/server/database/Knex/knexfile.ts migrate:rollback",
+        "knex:migrate": "knex --knexfile ./src/server/database/Knex/knexfile.ts migrate:latest",
+        "knex:seed": "knex --knexfile ./src/server/database/Knex/knexfile.ts seed:run",
+
+Depois so rodar o comando:
+
+        yarn knex:migrate
