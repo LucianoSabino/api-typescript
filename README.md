@@ -184,11 +184,7 @@ Knex.js é uma biblioteca para Node.js que facilita a interação com bancos de 
 
           yarn add sqlite3
 
-<<<<<<< HEAD
--   No arquivo _database/Knex/knexfile.ts_ esta as configuração de conexão do banco de dados.
-=======
-  <h5>No arquivo _database/Knex/Environement.ts_ esta as configuração de conexão do banco de dados.</h5>
->>>>>>> df967770124eac96f5628dbab29b54a10ad4f793
+  <h5>No arquivo _database/Knex/knexfile.ts_ esta as configuração de conexão do banco de dados.</h5>
 
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/knexC.png?raw=true)
 
@@ -201,13 +197,14 @@ Tendo tres tipos de conexão
   <h5>No arquivo _database/Knex/index.ts_ esta passando as configuração de conexão e alternando entre elas</h5>
 
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/knexCIndex.png?raw=true)
-<<<<<<< HEAD
 
 <h5> Fazendo as migrações </h5>
 
 -   Execute esse comando para criar um arquivo de migração:
 
           yarn knex --knexfile ./src/server/database/Knex/knexfile.ts migrate:make test
+
+Deve aparecer um arquivo dentro da pastra de _database/migrations_: Caso não tenha criar uma
 
 Depois so fazer as configurações de tabelas, Exemplo:
 
@@ -220,8 +217,46 @@ Depois no arquivo _package.json_ coloque:
         "knex:migrate": "knex --knexfile ./src/server/database/Knex/knexfile.ts migrate:latest",
         "knex:seed": "knex --knexfile ./src/server/database/Knex/knexfile.ts seed:run",
 
-Depois so rodar o comando:
+Depois so rodar o comando e sera criado a tabela com as informações:
 
         yarn knex:migrate
-=======
->>>>>>> df967770124eac96f5628dbab29b54a10ad4f793
+
+-   Foi criado uma pasta _models_ dentro de _server_ e colocado só a interfeice: caminho correto _server/models/Cidade.ts_
+
+          export interface Icidade {
+              id: number;
+              nome: string;
+          }
+
+Depois exprotado no index: caminho _server/models/index.ts_
+
+        export * from "./Cidade";
+
+-   Depois foi criado uma uma pasta dentro de _server/Knex/@types/knex.d.ts_ e colocado:
+
+          import { Icidade } from "../../models";
+
+          declare module "knex/types/tables" {
+              interface Tables {
+                  cidade: Icidade;
+              }
+          }
+
+<h5>Inserindo dados no banco</h5>
+
+-   Foi criado uma pasta _server/providers/cidade/Create.ts_ onde vai ficar responsavel por toda parte de inserir dados no banco de dados. Assim quando quiser trocar de ORM é so modificar esse aquivo.
+
+O codigo ficou assim
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/inserindoDados.png?raw=true)
+
+no arquivo index foi feito a exportação _server/providers/cidade/index.ts_
+
+        import * as create from "./Create";
+        export const CidadeProvider = {
+            ...create,
+        }
+
+Depois foi feito a modificação no _controller/cidade/Create.ts_ ficando assim para salva as cidades no banco.
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/eees.png?raw=true)
