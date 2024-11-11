@@ -3,7 +3,8 @@ import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 import { validation } from "../../shared/middlewares";
 
-// Validação qualquer coisa e na documentação do yup
+// É feito essa interface para ter uma validação mais precisa dos dados
+// Ou seja caso eu não passe o nome ele vai da erro por causa do yup
 
 interface IParamProps {
     id?: number;

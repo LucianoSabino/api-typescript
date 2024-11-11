@@ -1,7 +1,7 @@
 // Passando as conxão
 
 import knex from "knex";
-import { development, production, test } from "./Environement";
+import { development, production, test } from "./knexfile";
 
 const getEnviroment = () => {
     switch (process.env.NODE_ENV) {

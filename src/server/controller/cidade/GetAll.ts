@@ -3,6 +3,9 @@ import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 import { validation } from "../../shared/middlewares";
 
+// É feito essa interface para ter uma validação mais precisa dos dados
+// Ou seja caso eu não passe o nome ele vai da erro por causa do yup
+
 // Definição da interface com page e limit como number | undefined
 interface IQueryProps {
     page?: number;
