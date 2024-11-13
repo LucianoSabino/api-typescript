@@ -204,6 +204,8 @@ Tendo tres tipos de conexão
 
           yarn knex --knexfile ./src/server/database/Knex/knexfile.ts migrate:make test
 
+Esse _test_, pode ser qualquer nome.
+
 Deve aparecer um arquivo dentro da pastra de _database/migrations_: Caso não tenha criar uma
 
 Depois so fazer as configurações de tabelas, Exemplo:
@@ -260,3 +262,14 @@ no arquivo index foi feito a exportação _server/providers/cidade/index.ts_
 Depois foi feito a modificação no _controller/cidade/Create.ts_ ficando assim para salva as cidades no banco.
 
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/eees.png?raw=true)
+
+<h5>Foi feita uma alteração na pasta testes: *test/cidade/jest.setup.ts</h5>
+- Como ao rodar test esta criando um banco de dados em menoria, então é necessario rodar uma migração especifica para isso.
+
+            beforeAll(async () => {
+                await Knex.migrate.latest();
+            });
+
+            afterAll(async () => {
+                await Knex.destroy();
+            });
