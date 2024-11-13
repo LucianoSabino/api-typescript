@@ -261,7 +261,7 @@ no arquivo index foi feito a exportação _server/providers/cidade/index.ts_
 
 Depois foi feito a modificação no _controller/cidade/Create.ts_ ficando assim para salva as cidades no banco.
 
-![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/eees.png?raw=true)
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/eee.png?raw=true)
 
 <h5>Foi feita uma alteração na pasta testes: *test/cidade/jest.setup.ts</h5>
 - Como ao rodar test esta criando um banco de dados em menoria, então é necessario rodar uma migração especifica para isso.
