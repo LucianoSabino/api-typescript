@@ -2,6 +2,7 @@ import { Request, RequestHandler, Response } from "express";
 import { StatusCodes } from "http-status-codes";
 import * as yup from "yup";
 import { validation } from "../../shared/middlewares";
+import { CidadeProvider } from "../../database/providers/cidade";
 
 // É feito essa interface para ter uma validação mais precisa dos dados
 // Ou seja caso eu não passe o nome ele vai da erro por causa do yup
@@ -22,16 +23,23 @@ export const getById = async (
     req: Request<IParamProps>,
     res: Response
 ): Promise<void> => {
-    if (Number(req.params.id) === 99999) {
-        return void res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+    if (!req.params.id) {
+        res.status(StatusCodes.BAD_REQUEST).json({
             errors: {
-                default: "Registro não encontrado",
+                default: "O parametro 'id' precisa ser informado!",
             },
         });
     }
 
-    return void res.status(StatusCodes.OK).json({
-        id: req.params.id,
-        nome: "Cruz",
-    });
+    const result = await CidadeProvider.getById(Number(req.params.id));
+
+    if (result instanceof Error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            errors: {
+                default: result.message,
+            },
+        });
+    }
+
+    return void res.status(StatusCodes.OK).json(result);
 };
