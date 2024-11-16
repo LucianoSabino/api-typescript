@@ -165,8 +165,9 @@ Assim foi feito para todas as rotas.
 
 <h3 align="center"> Deploy da API Express no Render</h3>
 
-[Site Render](https://render.com/)
-[Video explicativo](https://youtu.be/hgCASoTp0XY?si=q1lHVePlOiR_Jmzf)
+-   Site para fazer deploy [Site Render](https://render.com/)
+
+-   Qualquer duvida [Video explicativo](https://youtu.be/hgCASoTp0XY?si=q1lHVePlOiR_Jmzf)
 
 <h3 align="center"> Banco de dados</h3>
 OBS: SE atente aos caminhos dos arquivos e comandos.
@@ -273,3 +274,51 @@ Depois foi feito a modificação no _controller/cidade/Create.ts_ ficando assim 
             afterAll(async () => {
                 await Knex.destroy();
             });
+
+<h5>Como ficou o resto providers cidade : *dataabase/providers/cidade/ "Count, DeleteByid, GetAll, GetById, UpdateById".ts*</h5>
+
+_Obs:_ Tambem tem alteração na respequetivas pastas na parte de _controller/cidade_ para o funcionamento.
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/count.png?raw=true)
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/deletebyid.png?raw=true)
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/getall.png?raw=true)
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/getbyid.png?raw=true)
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/updatebyid.png?raw=true)
+
+<h5>Foi alterado index de *src/index.ts</h5>
+
+-   Assim quando a aplicação estiver em produção criar uma migratio, ou seja uma tabela no sevidor.
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/index.png?raw=true)
+
+-   Foi adiciomado no arquivo _.env_
+
+          IS_LOCALHOST=true
+
+<h5>Inserindo cidade altomatica *server/database/seeds/0000_insert_cidade.ts*</h5>
+
+-   O nome _0000_insert_cidade.ts_ foi colocado manualmente, nele conterar o codigo para inserir todos as cidades da Bahia.
+
+-   É feita uma validação com count para quer, se ouver alguna cidade no banco não se cadastrada nem uma desse arry.
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/seed.png?raw=true)
+
+-   Tambem feito alteração em _src/index.ts_, fazendo com que ele insira as cidades altomaticamente
+
+          if (process.env.IS_LOCALHOST !== "true") {
+              Knex.migrate
+                  .latest()
+                  .then(() => {
+                      Knex.seed
+                          .run()
+                          .then(() => startServer())
+                          .catch(console.log);
+                  })
+                  .catch(console.log);
+          } else {
+              startServer();
+          }

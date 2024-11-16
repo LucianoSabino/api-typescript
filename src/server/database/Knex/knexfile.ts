@@ -21,6 +21,8 @@ export const development: Knex.Config = {
     migrations: {
         directory: path.resolve(__dirname, "..", "migrations"),
     },
+
+    // Ele popula o banco de dados
     seeds: {
         directory: path.resolve(__dirname, "..", "seeds"),
     },
