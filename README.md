@@ -279,13 +279,23 @@ Depois foi feito a modificação no _controller/cidade/Create.ts_ ficando assim 
 
 _Obs:_ Tambem tem alteração na respequetivas pastas na parte de _controller/cidade_ para o funcionamento.
 
+-   Count
+
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/count.png?raw=true)
+
+-   DeleteById
 
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/deletebyid.png?raw=true)
 
+-   GetAll
+
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/getall.png?raw=true)
 
+-   GetById
+
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/getbyid.png?raw=true)
+
+-   UpdateById
 
 ![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/updatebyid.png?raw=true)
 
@@ -322,3 +332,26 @@ _Obs:_ Tambem tem alteração na respequetivas pastas na parte de _controller/ci
           } else {
               startServer();
           }
+
+<h3 align="center"> Parte de pessoa </h3>
+
+-   Foi criado a migration de pessoa _0001_creat_pessoa.ts_ e a unica diferença foi a parte da ligação com a tabela de cidade, ficando assim:
+
+          table.bigInteger("cidadeId").index().notNullable().references("id").inTable(ETableNames.CIDADE).onUpdate("CASCADE").onDelete("RESTRICT");
+
+-   Alem de acrecentar os outros campos como na interface _database/models/Pessoa.ts_:
+
+          export interface IPessoa {
+              id: number;
+              email: string;
+              cidadeId: number;
+              nomeCompleto: string;
+          }
+
+Depois é só rodar o comando
+
+        yarn knex:migrate
+
+-   Alem de ter adicionado no _database/seeds_:
+
+          PESSOA = "pessoa",
