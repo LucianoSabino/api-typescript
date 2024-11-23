@@ -339,6 +339,8 @@ _Obs:_ Tambem tem alteração na respequetivas pastas na parte de _controller/ci
 
           table.bigInteger("cidadeId").index().notNullable().references("id").inTable(ETableNames.CIDADE).onUpdate("CASCADE").onDelete("RESTRICT");
 
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/migrationpessoa.png?raw=true)
+
 -   Alem de acrecentar os outros campos como na interface _database/models/Pessoa.ts_:
 
           export interface IPessoa {
@@ -355,3 +357,7 @@ Depois é só rodar o comando
 -   Alem de ter adicionado no _database/seeds_:
 
           PESSOA = "pessoa",
+
+<h5>O Resto foi bem paracido com que foi feito com cidade, provaid e controller</h5>
+
+<h3 align="center"> Controler de usuario </h3>

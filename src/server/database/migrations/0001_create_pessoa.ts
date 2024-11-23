@@ -5,10 +5,10 @@ export async function up(knex: Knex) {
     return knex.schema
         .createTable(ETableNames.PESSOA, (table) => {
             table.bigIncrements("id").primary().index();
-            table.string("nomeCompleto").index().notNullable();
-            table.string("email").unique().notNullable();
+            table.string("nomeCompleto").index().notNullable(); // Valor padrão se não for fornecido
+            table.string("email").unique().notNullable(); // Valor padrão se não for fornecido
 
-            // Esta vinculando com a tabela cidade
+            // Vinculação com a tabela cidade
             table
                 .bigInteger("cidadeId")
                 .index()

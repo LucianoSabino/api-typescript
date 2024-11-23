@@ -4,7 +4,7 @@ import path from "path";
 // Informaçoes do banco de dados
 export const development: Knex.Config = {
     client: "sqlite3",
-    useNullAsDefault: true,
+
     // Canimho do arquivo Onde quero salvar o banco de dados sqlite, nesse caso vai ser na raiz do projeto
     connection: {
         filename: path.resolve(
@@ -16,7 +16,7 @@ export const development: Knex.Config = {
             "database.sqlite"
         ),
     },
-
+    useNullAsDefault: false,
     // Canimho do arquivo Onde quero salvar as migrasoes
     migrations: {
         directory: path.resolve(__dirname, "..", "migrations"),

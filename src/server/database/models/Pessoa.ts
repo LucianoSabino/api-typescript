@@ -1,4 +1,4 @@
-export interface IPessoa {
+export interface Ipessoa {
     id: number;
     email: string;
     cidadeId: number;
