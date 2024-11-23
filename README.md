@@ -463,3 +463,25 @@ Isso que dizer que antes de salvar o usuario, criptogarfa a senha e depois salva
 
               res.status(StatusCodes.OK).json({ accessToken });
           }
+
+<h3 align="center"> Configuração para o banco de dados em deploy/Produção </h3>
+
+-   Vai ser utilizado o postgresql
+
+-   adicionando a biblioteca
+
+          yarn add pg
+          yarn add @types/pg -D
+
+-   Foi alterado no arquivo _database/Knex/knexfile.ts_, foi modificado a parte de produção ficando assim:
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/bancoproducao.png?raw=true)
+
+-   Alem do arquivo index _database/Knex/index.ts_
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/indexproducao.png?raw=true)
+
+<h5>Esta cendo utelizado um banco em nuvem</h5>
+
+-   Link do [tembo](https://tembo.io/docs/product/cloud/billing/)
+-   Duvida so ver o [video](https://youtu.be/5WkgKsoRYZw?si=ewlTg6ZmiijknUJp)
