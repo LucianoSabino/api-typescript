@@ -165,6 +165,8 @@ Assim foi feito para todas as rotas.
 
 <h3 align="center"> Deploy da API Express no Render</h3>
 
+-   Link do site rodando [Api](https://api-typescript-t76p.onrender.com)
+
 -   Site para fazer deploy [Site Render](https://render.com/)
 
 -   Qualquer duvida [Video explicativo](https://youtu.be/hgCASoTp0XY?si=q1lHVePlOiR_Jmzf)
@@ -361,3 +363,103 @@ Depois é só rodar o comando
 <h5>O Resto foi bem paracido com que foi feito com cidade, provaid e controller</h5>
 
 <h3 align="center"> Controler de usuario </h3>
+
+-   Foi feito o models
+
+          export interface Iusuario {
+              id: number;
+              email: string;
+              senha: string;
+              nome: string;
+          }
+
+-   Depois a migrations
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/migrationusuario.png?raw=true)
+
+-   Depois a exportação no _database/Knex/@types/knex.d.ts_
+
+        import { Icidade, Ipessoa, Iusuario } from "../../models";
+
+        declare module "knex/types/tables" {
+            interface Tables {
+                cidade: Icidade;
+                pessoa: Ipessoa;
+                usuario: Iusuario;
+            }
+        }
+
+-   Feito os providers _OBS: Sem a altenticação do token_
+
+Create
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/createusuario.png?raw=true)
+
+GetByEmail
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/getbyusuario.png?raw=true)
+
+-   Depois o controller, segue as mesma coisa de cidade e pessao
+
+No SignIn é feita a parte de login, comparação de senha e email
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/signin.png?raw=true)
+
+No SignUp é feita a parte de criar usuario
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/signup.png?raw=true)
+
+-   Depois é so fazer as rotas
+
+<h5>_Cripitografia de Senha_</h5>
+É diferente do TOKEN
+
+-   Adicionar a biblioteca
+
+          yarn add bcryptjs
+          yarn add @types/bcryptjs -D
+
+-   Como é um arquivo que vai ser utilizado em toda aplicação ele esta em _database/shared/services/PasswordCrypto.ts_
+-   Basicamente para criptografa a senha é so isso:
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/criptografia.png?raw=true)
+
+-   Agora no _database/providers/usuario/Create.ts_ é so adicionar isso :
+
+          const hashedPassword = await PasswordCrypto.hashPassword(usuario.senha);
+          usuario.senha = hashedPassword;
+
+Isso que dizer que antes de salvar o usuario, criptogarfa a senha e depois salva no banco de dados.
+
+-   Foi modificado tbm no _server/controller/usuario/SignIn.ts_, para verificar a senha pela criptografia.
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/criptografiasignin.png?raw=true)
+
+<h5>_Fazendo a parte de validação com TOKEN e JWT_</h5>
+
+-   Adicionar a biblioteca
+
+          yarn add jsonwebtoken
+          yarn add @types/jsonwebtoken -D
+
+-   Como é um arquivo que vai ser utilizado em toda aplicação ele esta em _database/shared/middlewares/ensureAuthenticated.ts_, nesse arquivo vai ser resposavel por fazer a verificação do Token
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/jwt.png?raw=true)
+
+-   Agora no arquivo _database/shared/services/JWTService.ts_, cria o Token
+
+![imagem de arquitetura do projeto](https://github.com/LucianoSabino/api-typescript/blob/master/img/jwtser.png?raw=true)
+
+-   Agora no arquivo de _database/controller/usuario/SignIn.ts_, so foi alterado a parte de _else_ que chama a função de criar um token, fica assim:
+
+          else {
+              // Gerando o tokem
+              const accessToken = JWTService.sign({ uid: result.id });
+
+              if (accessToken === "JWT_SECRET_NOT_FOUND") {
+                  res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                      errors: {
+                          default: "Erro ao gerar o Token de acesso!",
+                      },
+                  });
+                  return;
+              }
+
+              res.status(StatusCodes.OK).json({ accessToken });
+          }

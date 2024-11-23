@@ -4,6 +4,7 @@ import * as yup from "yup";
 import { validation } from "../../shared/middlewares";
 import { Iusuario } from "../../database/models";
 import { UsuarioProvider } from "../../database/providers/usuario";
+import { JWTService, PasswordCrypto } from "../../shared/services";
 
 // É feito essa interface para ter uma validação mais precisa dos dados
 // Ou seja caso eu não passe o nome ele vai da erro por causa do yup
@@ -41,7 +42,12 @@ export const singIn = async (
         return;
     }
 
-    if (senha !== result.senha) {
+    // Verificando a senha, pela criptografia
+    const passwordMatch = await PasswordCrypto.verifyPassword(
+        senha,
+        result.senha
+    );
+    if (!passwordMatch) {
         res.status(StatusCodes.UNAUTHORIZED).json({
             errors: {
                 default: "Email ou senha são invalidos",
@@ -49,6 +55,18 @@ export const singIn = async (
         });
         return;
     } else {
-        res.status(StatusCodes.OK).json({ accessToken: "Teste.teste.teste" });
+        // Gerando o tokem
+        const accessToken = JWTService.sign({ uid: result.id });
+
+        if (accessToken === "JWT_SECRET_NOT_FOUND") {
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+                errors: {
+                    default: "Erro ao gerar o Token de acesso!",
+                },
+            });
+            return;
+        }
+
+        res.status(StatusCodes.OK).json({ accessToken });
     }
 };
