@@ -57,7 +57,7 @@ depois crie um arquivo na raiz do projeto `.env`
 
 e coloque
 
-            _node_modules
+            /node_modules
             .env_
 
 para o git iginorar esses arquivos.
