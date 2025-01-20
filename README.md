@@ -1,3 +1,4 @@
+[link da plylist](https://www.youtube.com/watch?v=SVepTuBK4V0&list=PL29TaWXah3iaaXDFPgTHiFMBF6wQahurP)
 <h3 align="center"> Inicializando o Node e o Git</h3>
 
         npm init -y
