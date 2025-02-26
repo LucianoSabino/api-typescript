@@ -487,3 +487,8 @@ Isso que dizer que antes de salvar o usuario, criptogarfa a senha e depois salva
 -   Duvida como alterar o projeto para o banco de dados [Link do video base](https://www.youtube.com/watch?v=drRnlp3sKBw&list=PL29TaWXah3iaaXDFPgTHiFMBF6wQahurP&index=44)
 -   Link do site para criar o banco de dados na nuvem gratuito [tembo](https://tembo.io/docs/product/cloud/billing/)
 -   Duvida configuração do banco de dados na nuvem [video](https://youtu.be/5WkgKsoRYZw?si=ewlTg6ZmiijknUJp)
+
+<h6>Outro site</h6>
+
+- Link do site [neon](https://neon.tech)
+- Video qualquer duvida [video](https://youtu.be/8eQDSTQyqQg?si=ne_d9Uy8wRVvDSwD)
